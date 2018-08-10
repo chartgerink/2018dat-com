@@ -305,7 +305,7 @@ The semi-technical proposal for verified, modular, and provenance based scholarl
 
 # Supporting Information
 
-S1 File. Overview of original Dat links corresponding to shortened links: [ADD URL]().
+S1 File. Overview of original Dat links corresponding to shortened links: [https://github.com/chartgerink/2018dat-com/raw/master/assets/mock-modules-overview.ods](https://github.com/chartgerink/2018dat-com/raw/master/assets/mock-modules-overview.ods).
 
 # References
 
