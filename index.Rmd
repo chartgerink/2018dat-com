@@ -180,7 +180,7 @@ To register a module into the researcher's profile, the versioned Dat link is in
 
 Figure `r fignr` depicts how the scholarly modules relate to each other (Panel B). The versioned, registered scholarly modules become the parent and root links in subsequent child modules. For example, a set of predictions link back to the theory they are distilled from; a study design links back to the predictions it is planned to test and by extension to the theory it is based on. Panel B in `r fignr` conceptually depicts one contained empirical research cycle registered in this way. The links between versioned scholarly modules embeds the chronological nature of the research process in its communication. 
 
-```{r echo = FALSE, fig.align="center", out.width='100%', fig.cap='Conceptual representations of how scholarly profiles relate to each other (Panel A), how scholarly modules relate to each other (Panel B), how scholarly profiles and modules create a network of scholarly activity in both researchers and research (Panel C), and '}
+```{r echo = FALSE, fig.align="center", out.width='100%', fig.cap='Conceptual representations of how scholarly profiles relate to each other (Panel A), how scholarly modules relate to each other (Panel B), how scholarly profiles and modules create a network of scholarly activity in both researchers and research (Panel C), and how claims of authorship are verified if two-way or unverified if one-way (Panel D).'}
 knitr::include_graphics('assets/fig4.png')
 ```
 
