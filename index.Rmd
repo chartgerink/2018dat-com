@@ -5,30 +5,134 @@ author:
 bibliography: shared-logs.bib
 documentclass: article
 biblio-style: apalike
-classoption: a4paper
 output:
-  keep-tex: true
+    pdf_document:
+        keep_tex: true
 ---
 
 __Content available under [CC 0 Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/legalcode), unless otherwise noted__
 
 [If you want to use track changes in Word, find a Word version of this manuscript here](https://github.com/chartgerink/2018dat-com/raw/master/index.docx)
 
+```{r, echo = FALSE}
+fignr <- 1
+```
+
 # Abstract
 
-A scholarly communication system needs to register, distribute, certify, archive, and incentivize knowledge production. The current article-based system technically fulfills these functions, but suboptimally. I propose a module-based communication infrastructure that attempts to take a wider view of these functions and optimize the fulfillment of the five functions of scholarly communication. Scholarly modules are conceptualized as the constituent parts of a research process as determined by a researcher. These can be text, but also code, data, and any other relevant piece of information. The chronology of these modules is registered by iteratively linking to each other, creating a provenance record of parent- and child modules (and a network of modules). These scholarly modules are linked to scholarly profiles, creating a network of profiles, and a network of how profiles relate to their constituent modules. All these scholarly modules would be communicated on the new peer-to-peer Web protocol Dat ([datproject.org](https://datproject.org)), which provides a decentralized register that is immutable, facilitates greater content integrity than the current system through verification, and is open-by-design. open-by-design would also allow diversity in the way content is consumed, discovered, and evaluated to arise. This initial proposal needs to be refined and developed further based on technical developments of the Dat protocol and its implementations, and discussions within the scholarly community to evaluate the qualities claimed here. Nonetheless, a minimal prototype is available today and this is technically feasible.
+A scholarly communication system needs to register, distribute,
+certify, archive, and incentivize knowledge production. The current
+article-based system technically fulfills these functions, but
+suboptimally. I propose a module-based communication infrastructure
+that attempts to take a wider view of these functions and optimize the
+fulfillment of the five functions of scholarly
+communication. Scholarly modules are conceptualized as the constituent
+parts of a research process as determined by a researcher. These can
+be text, but also code, data, and any other relevant piece of
+information. The chronology of these modules is registered by
+iteratively linking to each other, creating a provenance record of
+parent- and child modules (and a network of modules). These scholarly
+modules are linked to scholarly profiles, creating a network of
+profiles, and a network of how profiles relate to their constituent
+modules. All these scholarly modules would be communicated on the new
+peer-to-peer Web protocol Dat
+([datproject.org](https://datproject.org)), which provides a
+decentralized register that is immutable, facilitates greater content
+integrity than the current system through verification, and is
+open-by-design. open-by-design would also allow diversity in the way
+content is consumed, discovered, and evaluated to arise. This initial
+proposal needs to be refined and developed further based on technical
+developments of the Dat protocol and its implementations, and
+discussions within the scholarly community to evaluate the qualities
+claimed here. Nonetheless, a minimal prototype is available today and
+this is technically feasible.
 
 # Introduction
 
-In scholarly research, communication needs to be thorough and parsimonious in logging the order of various research steps, while at the same time being functional in seeking- and distributing knowledge. Roosendaal and Geurts proposed that any scholarly communication system needs to serve as a (1) registration-, (2) certification-, (3) awareness-, and (4) archival system [@roosendaal1998]. Sompel and colleagues added that it also needs to serve as an (5) incentive system [@doi:10.1045/september2004-vandesompel]. 
+In scholarly research, communication needs to be thorough and
+parsimonious in logging the order of various research steps, while at
+the same time being functional in seeking- and distributing
+knowledge. Roosendaal and Geurts proposed that any scholarly
+communication system needs to serve as a (1) registration-, (2)
+certification-, (3) awareness-, and (4) archival system
+[@roosendaal1998]. Sompel and colleagues added that it also needs to
+serve as an (5) incentive system
+[@doi:10.1045/september2004-vandesompel].
 
-How the functions of scholarly communication are conceptualized and implemented directly impact (the effectiveness of) scholarly research. For example, an incentive system might be present where number of publications or publication outlet is more important than the quality of the publications [@doi:10.3389/fnhum.2018.00037]. In a narrow sense, this scholarly communication system serves the fifth function of providing an incentive system. In a wider sense, it undermines the goal of scholarly research, which scholarly communication is a part of, and therefore does not serve its purpose.
+How the functions of scholarly communication are conceptualized and
+implemented directly impact (the effectiveness of) scholarly
+research. For example, an incentive system might be present where
+number of publications or publication outlet is more important than
+the quality of the publications [@doi:10.3389/fnhum.2018.00037]. In a
+narrow sense, this scholarly communication system serves the fifth
+function of providing an incentive system. In a wider sense, it
+undermines the goal of scholarly research, which scholarly
+communication is a part of, and therefore does not serve its purpose.
 
-Narrow conceptualizations of the functions of a scholarly communication system can be identified in the current article-based system. Registration occurs for published works, but registration is incomplete due to selective publication [e.g., 1 out of 2 registered clinical trials gets published; @doi:10.1016/0140-6736_91_90201-y] making research highly inefficient [@doi:10.1371/journal.pone.0084896]. Certification occurs through peer review [@doi:10.1038/nature05008] but peer review is confounded by a set of human biases at the reporting- and evaluation stages [e.g., methods are evaluated as of higher quality when they result in statistically significant results than when in statistically nonsignificant results; @doi:10.1007/bf01173636]. Awareness occurs, but increasingly so for only those researchers with the financial means to access or make accessible. Restrictions on the sharing of scholarly information hampers discovery and widespread dissemination. Content is archived, but is centralized (i.e., failure prone), separated from the main dissemination infrastructure, and not available until an arbitrary trigger event occurs [i.e., a dark archive; @doi:10.1629/uksg.215].
+Narrow conceptualizations of the functions of a scholarly
+communication system can be identified in the current article-based
+system. Registration occurs for published works, but registration is
+incomplete due to selective publication [e.g., 1 out of 2 registered
+clinical trials gets published; @doi:10.1016/0140-6736_91_90201-y]
+making research highly inefficient
+[@doi:10.1371/journal.pone.0084896]. Certification occurs through peer
+review [@doi:10.1038/nature05008] but peer review is confounded by a
+set of human biases at the reporting- and evaluation stages [e.g.,
+methods are evaluated as of higher quality when they result in
+statistically significant results than when in statistically
+nonsignificant results; @doi:10.1007/bf01173636]. Awareness occurs,
+but increasingly so for only those researchers with the financial
+means to access or make accessible. Restrictions on the sharing of
+scholarly information hampers discovery and widespread
+dissemination. Content is archived, but is centralized (i.e., failure
+prone), separated from the main dissemination infrastructure, and not
+available until an arbitrary trigger event occurs [i.e., a dark
+archive; @doi:10.1629/uksg.215].
 
-The scholarly paper seems an anachronistic form of communication in light of how we now know it undermines the functions it is supposed to serve. When no alternative communication form was feasible (i.e., before the Internet and the Web), the scholarly paper seemed a reasonable and balanced form for communication. However, already in 1998, seven years after the first Web browser was released, researchers associated with the scholarly publisher Elsevier suggested to make changes to the way scholars communicate scholarly research [@doi:10.1108/eum0000000007185]. More specifically, they suggested to change the communication to a more modular form, which would help iterate research more frequently and increase feedback moments [high speed of feedback was essential to for example Nature's rise during the early twentieth century; @isbn:9780226261454]. Throughout the years, others also suggested various perspectives on modularity [@doi:10.3389/fncom.2012.00019; @doi:10.7717/peerj-cs.78] and suggested micro- and nanopublications [@doi:10.7717/peerj-cs.78; @doi:10.1186/2041-1480-5-28].
+The scholarly paper seems an anachronistic form of communication in
+light of how we now know it undermines the functions it is supposed to
+serve. When no alternative communication form was feasible (i.e.,
+before the Internet and the Web), the scholarly paper seemed a
+reasonable and balanced form for communication. However, already in
+1998, seven years after the first Web browser was released,
+researchers associated with the scholarly publisher Elsevier suggested
+to make changes to the way scholars communicate scholarly research
+[@doi:10.1108/eum0000000007185]. More specifically, they suggested to
+change the communication to a more modular form, which would help
+iterate research more frequently and increase feedback moments [high
+speed of feedback was essential to for example Nature's rise during
+the early twentieth century; @isbn:9780226261454]. Throughout the
+years, others also suggested various perspectives on modularity
+[@doi:10.3389/fncom.2012.00019; @doi:10.7717/peerj-cs.78] and
+suggested micro- and nanopublications [@doi:10.7717/peerj-cs.78;
+@doi:10.1186/2041-1480-5-28].
 
-Modular scholarly outputs, each a separate step in the research process, could supplement the scholarly article [as detailed in @doi:10.3390/publications6020021]. Scholarly textbooks [i.e., vademecum science; @isbn:9780226253251] communicate findings with few details and a high degree of certainty; scholarly articles present relatively more details and less certainty than textbooks, but still lack the detail to reproduce results. This lack of detail is multiplied by the increasingly complex research pipelines due to technological changes and the size of data processed. Moreover, textbooks and articles construct narratives across findings because they report far after events have happened. Scholarly modules could serve as a base for scholarly articles, reporting more details, less certainty of findings, and where events are reported closer to their occurrence. Granular reporting could facilitate reproducibility (i.e., it is easier to reproduce one action with more details than multiple actions with fewer details per action); earlier reporting could facilitate discussion by making it practical for the research process [extending the idea of Registered Reports; @doi:10.1016/j.cortex.2012.12.016] and making content easier to find and reuse. As findings become replicated and more consensus about a finding starts to arise, findings could move up the 'chain' and be integrated into scholarly articles and textbooks. Articles and books would then provide overviews and larger narratives to understand historical developments within scholarly research. Figure \@ref(fig:datcom-fig1) provides a conceptual depiction of how these different forms of documenting findings relate to each other.
+Modular scholarly outputs, each a separate step in the research
+process, could supplement the scholarly article [as detailed in
+@doi:10.3390/publications6020021]. Scholarly textbooks [i.e.,
+vademecum science; @isbn:9780226253251] communicate findings with few
+details and a high degree of certainty; scholarly articles present
+relatively more details and less certainty than textbooks, but still
+lack the detail to reproduce results. This lack of detail is
+multiplied by the increasingly complex research pipelines due to
+technological changes and the size of data processed. Moreover,
+textbooks and articles construct narratives across findings because
+they report far after events have happened. Scholarly modules could
+serve as a base for scholarly articles, reporting more details, less
+certainty of findings, and where events are reported closer to their
+occurrence. Granular reporting could facilitate reproducibility (i.e.,
+it is easier to reproduce one action with more details than multiple
+actions with fewer details per action); earlier reporting could
+facilitate discussion by making it practical for the research process
+[extending the idea of Registered Reports;
+@doi:10.1016/j.cortex.2012.12.016] and making content easier to find
+and reuse. As findings become replicated and more consensus about a
+finding starts to arise, findings could move up the 'chain' and be
+integrated into scholarly articles and textbooks. Articles and books
+would then provide overviews and larger narratives to understand
+historical developments within scholarly research. Figure
+\@ref(fig:datcom-fig1) provides a conceptual depiction of how these
+different forms of documenting findings relate to each other.
 
 ```{r datcom-fig1, echo = FALSE, , fig.align="center", out.width='100%', fig.cap="Conceptual depiction of how different forms of scholarly communication relate to each other in both detail and certainty."}
 knitr::include_graphics('assets/fig1.png')
@@ -36,7 +140,7 @@ knitr::include_graphics('assets/fig1.png')
 fignr <- fignr + 1
 ```
 
-Below I extend on technical details for a modular scholarly communication infrastructure that facilitates (more) continuous communication and builds on recent advances in Web infrastructures. The premise of this scholarly infrastructure is a wider interpretation of the five functions of a scholarly communication system, where (1) registration is (more) complete, (2) certification occurs by embedding chronology to prevent misrepresentation and by increased potential for verification and peer discussion, (3) unrestricted awareness (i.e., access) is embedded in the underlying peer-to-peer protocol that locks it open-by-design, (4) archival is facilitated by simplified copying, and (5) making more specific scholarly evaluation possible to improve incentives [see @doi:10.3390/publications6020021 for an initial proposal of such evaluation systems]. First, I expand on the functionality of the Internet protocol [Dat](https://datproject.org) and how it facilitates improved dissemination and archival. Second, I illustrate an initial design of modular scholarly communication using this protocol to facilitate better registration and certification. 
+Below I extend on technical details for a modular scholarly communication infrastructure that facilitates (more) continuous communication and builds on recent advances in Web infrastructures. The premise of this scholarly infrastructure is a wider interpretation of the five functions of a scholarly communication system, where (1) registration is (more) complete, (2) certification occurs by embedding chronology to prevent misrepresentation and by increased potential for verification and peer discussion, (3) unrestricted awareness (i.e., access) is embedded in the underlying peer-to-peer protocol that locks it open-by-design, (4) archival is facilitated by simplified copying, and (5) making more specific scholarly evaluation possible to improve incentives [for an initial proposal of such evaluation systems see @doi:10.3390/publications6020021 for an initial proposal of such evaluation systems]. First, I expand on the functionality of the Internet protocol [Dat](https://datproject.org) and how it facilitates improved dissemination and archival. Second, I illustrate an initial design of modular scholarly communication using this protocol to facilitate better registration and certification. 
 
 ## Dat protocol
 
